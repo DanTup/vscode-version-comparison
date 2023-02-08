@@ -16,7 +16,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
         node-version: [16]
-        build-version: [stable, insiders]
+        build-version: [1.54.0, stable, insiders]
 
     steps:
 

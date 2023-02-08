@@ -1,0 +1,8 @@
+.DS_Store
+.vscode-test/
+.vscode/.browse.VC.db*
+*.log
+build/
+logs/
+node_modules/
+out/

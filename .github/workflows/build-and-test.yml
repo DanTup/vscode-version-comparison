@@ -1,0 +1,46 @@
+name: Run Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+
+  build:
+    name: "${{ matrix.bot }} (${{ matrix.build-version }} ${{ matrix.os }})"
+    runs-on: ${{ matrix.os }}
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        node-version: [16]
+        build-version: [stable, insiders]
+
+    steps:
+
+      - uses: actions/checkout@v3
+
+      - name: Setup XVFB
+        if: matrix.os == 'ubuntu-latest'
+        run: Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+
+      - name: Setup Node v${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: npm install
+        run: npm install
+
+      - name: npm build
+        run: npm run build
+
+      - name: npm test
+        run: npm test
+        env:
+          CI: true
+          ELECTRON_NO_ATTACH_CONSOLE: 1
+          DISPLAY: ":99.0"
+          BUILD_VERSION: ${{ matrix.build-version }}

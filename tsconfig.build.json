@@ -1,0 +1,10 @@
+{
+	"extends": "./tsconfig.json",
+	"exclude": [
+		".vscode-test",
+		"node_modules",
+		"out",
+		"src/extension",
+		"src/test/test_project"
+	]
+}

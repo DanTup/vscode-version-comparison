@@ -1,0 +1,30 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "watch",
+			"problemMatcher": [
+				"$ts-webpack-watch"
+			],
+			"isBackground": true,
+			"presentation": {
+				"reveal": "never"
+			},
+			"dependsOn": [
+				"npm: watch-non-ext"
+			]
+		},
+		{
+			"type": "npm",
+			"script": "watch-non-ext",
+			"problemMatcher": [
+				"$tsc-watch"
+			],
+			"isBackground": true,
+			"presentation": {
+				"reveal": "never"
+			},
+		}
+	]
+}
